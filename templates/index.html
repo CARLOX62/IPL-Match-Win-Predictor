@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IPL Victory Predictor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("/static/background.jpg");
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            font-size: 3em;
+            text-shadow: 2px 2px #000;
+        }
+
+        form {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            margin: 40px auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 1em;
+        }
+
+        button {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+            transform: scale(1.05);
+        }
+
+        .result-box {
+            background: rgba(0, 0, 0, 0.75);
+            border-left: 6px solid #00c6ff;
+            padding: 25px;
+            margin: 40px auto;
+            border-radius: 15px;
+            max-width: 500px;
+            box-shadow: 0 0 25px rgba(0, 198, 255, 0.3);
+            animation: fadeIn 1s ease-in-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-box h2 {
+            font-size: 1.8em;
+            color: #00ffff;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .result-box p {
+            font-size: 1.3em;
+            margin: 10px 0;
+            text-shadow: 1px 1px #000;
+        }
+
+        .result-box .win {
+            color: #00ff99;
+            font-weight: bold;
+        }
+
+        .result-box .loss {
+            color: #ff5f5f;
+            font-weight: bold;
+        }
+
+        .error-box {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 15px;
+            max-width: 500px;
+            margin: 20px auto;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            form {
+                width: 90%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🏏 IPL Victory Predictor</h1>
+
+    <form method="POST">
+        <select name="batting_team" required>
+            <option value="" disabled selected>Select Batting Team</option>
+            {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="bowling_team" required>
+            <option value="" disabled selected>Select Bowling Team</option>
+            {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="city" required>
+            <option value="" disabled selected>Select City</option>
+            {% for city in cities %}
+                <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="target" placeholder="Target" required>
+        <input type="number" name="score" placeholder="Score" required>
+        <input type="number" step="0.1" name="overs" placeholder="Overs Completed" required>
+        <input type="number" name="wickets" placeholder="Wickets Down" required>
+
+        <button type="submit">🎯 Predict Now</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result-box">
+            <h2>🎯 Prediction Result</h2>
+            <p><strong>🏏 {{ prediction.batting }}</strong> has a <span class="win">{{ prediction.win }}%</span> chance to win</p>
+            <p><strong>🛡️ {{ prediction.bowling }}</strong> has a <span class="loss">{{ prediction.loss }}%</span> chance to win</p>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="error-box">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
