@@ -97,7 +97,7 @@ Navigate to https://ipl-match-win-probability-predictor.onrender.com
 
 | Input Form | Prediction Result |
 |------------|-------------------|
-| ![Input](./static/Screenshot%202025-07-16%20224414.png) | ![Output](./static/output.png) |
+| ![Input](./static/Screenshot%202025-07-16%20224414.png) | ![Output](./static/Screenshot%202025-07-16%20224424.png) |
 
 
 ---
