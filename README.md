@@ -88,7 +88,7 @@ pip install -r requirements.txt
 python app.py
 
 # 5. Visit in browser
-# Navigate to https://ipl-match-win-probability-predictor.onrender.com
+Navigate to https://ipl-match-win-probability-predictor.onrender.com
 ```
 
 ---
@@ -99,7 +99,6 @@ python app.py
 |------------|-------------------|
 | ![Input](./static/input.png) | ![Output](./static/output.png) |
 
-> 💡 Add your screenshots to the `/static` folder with matching names above.
 
 ---
 
